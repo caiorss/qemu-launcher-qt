@@ -6,448 +6,170 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>757</width>
-    <height>657</height>
+    <width>664</width>
+    <height>406</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Desktop Launcher</string>
+   <string>QEMU VM Launcher</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
+   <widget class="QPushButton" name="btn_run">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>50</y>
-      <width>711</width>
-      <height>541</height>
+      <x>60</x>
+      <y>80</y>
+      <width>131</width>
+      <height>31</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Run virtual machine disk image ISO file.</string>
+    </property>
     <property name="whatsThis">
-     <string>Tab for application launcher.</string>
+     <string>Button for running virtual machine.</string>
     </property>
-    <property name="currentIndex">
-     <number>1</number>
+    <property name="text">
+     <string>Run virtual machine</string>
     </property>
-    <widget class="QWidget" name="tab">
-     <attribute name="title">
-      <string>Application Launcher</string>
-     </attribute>
-     <widget class="QPushButton" name="btn_run">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>30</y>
-        <width>80</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>Run selected command in the command registry.</string>
-      </property>
-      <property name="text">
-       <string>Run</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_add">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>30</y>
-        <width>80</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>Add new command to command registry.</string>
-      </property>
-      <property name="text">
-       <string>Add</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_remove">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>30</y>
-        <width>80</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>Remove selected command from the command registry.</string>
-      </property>
-      <property name="text">
-       <string>Remove</string>
-      </property>
-     </widget>
-     <widget class="QListWidget" name="cmd_registry">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>150</y>
-        <width>461</width>
-        <height>291</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>Double click to run any selected command or click at the button run.</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>120</y>
-        <width>141</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Applications registry</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>60</y>
-        <width>131</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Command Input</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="chb_always_on_top">
-      <property name="geometry">
-       <rect>
-        <x>320</x>
-        <y>40</y>
-        <width>161</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>If checked, any item in the command registry become editable instead of being run.</string>
-      </property>
-      <property name="text">
-       <string>Always on top</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="chb_editable">
-      <property name="geometry">
-       <rect>
-        <x>320</x>
-        <y>20</y>
-        <width>161</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="toolTip">
-       <string>If checked, any item in the command registry become editable instead of being run.</string>
-      </property>
-      <property name="text">
-       <string> Commands Editable</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="cmd_input">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>90</y>
-        <width>461</width>
-        <height>23</height>
-       </rect>
-      </property>
-      <property name="editable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_file_bookmarks">
-     <property name="whatsThis">
-      <string/>
-     </property>
-     <attribute name="title">
-      <string>Desktop Bookmarks</string>
-     </attribute>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>20</y>
-        <width>221</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>File/Directory registry bookmark</string>
-      </property>
-     </widget>
-     <widget class="QWidget" name="verticalLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>510</x>
-        <y>290</y>
-        <width>160</width>
-        <height>171</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QPushButton" name="btn_open_home">
-         <property name="toolTip">
-          <string>Open User's home directory</string>
-         </property>
-         <property name="whatsThis">
-          <string>Button for opening user home directory</string>
-         </property>
-         <property name="text">
-          <string>Open Home</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_open_docs">
-         <property name="toolTip">
-          <string>Open documents directory</string>
-         </property>
-         <property name="whatsThis">
-          <string>Button for opening user's documents</string>
-         </property>
-         <property name="text">
-          <string>Open Documents</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_open_desktop">
-         <property name="toolTip">
-          <string>Open user's Desktop directory</string>
-         </property>
-         <property name="whatsThis">
-          <string>Button for opening user's Desktop directory</string>
-         </property>
-         <property name="text">
-          <string>Open Desktop</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_open_fonts">
-         <property name="toolTip">
-          <string>Open fonts directory</string>
-         </property>
-         <property name="whatsThis">
-          <string>Button for opening user's font directory</string>
-         </property>
-         <property name="text">
-          <string>Open Fonts</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QTableView" name="tview_disp">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>50</y>
-        <width>651</width>
-        <height>211</height>
-       </rect>
-      </property>
-      <property name="whatsThis">
-       <string>TableView that shows all bookmark files, directories and URLs available. Just double click at any item to open it.</string>
-      </property>
-     </widget>
-     <widget class="QWidget" name="formLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>320</y>
-        <width>451</width>
-        <height>112</height>
-       </rect>
-      </property>
-      <layout class="QFormLayout" name="formLayout">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>Type</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="entry_file_type"/>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>File/URI</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="entry_file_name">
-         <property name="whatsThis">
-          <string>Name of bookmarked URL or file/directory without absolute path</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_6">
-         <property name="text">
-          <string>Path</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="entry_file_path"/>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>Brief</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="QLineEdit" name="entry_file_brief"/>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="horizontalLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>440</y>
-        <width>331</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QPushButton" name="btn_open_file">
-         <property name="whatsThis">
-          <string>Open selected item in the file/directory registry bookmark</string>
-         </property>
-         <property name="text">
-          <string>Open</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_remove_file">
-         <property name="whatsThis">
-          <string>Button for removing selected item from file/directory bookmark</string>
-         </property>
-         <property name="text">
-          <string>Remove</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btn_add_file">
-         <property name="whatsThis">
-          <string>Button for adding new file to the file/directory bookmarks</string>
-         </property>
-         <property name="text">
-          <string>Add</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="Line" name="line">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>290</y>
-        <width>451</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_8">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>270</y>
-        <width>111</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Item Properties</string>
-      </property>
-     </widget>
-    </widget>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="entry_disk_path">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>40</y>
+      <width>471</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>10</y>
+      <width>171</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Path to virtual ISO image</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="spin_memory">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>90</y>
+      <width>71</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="minimum">
+     <number>2024</number>
+    </property>
+    <property name="maximum">
+     <number>640000</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>90</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>RAM memory</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="enable_audio">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>160</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Enable audio</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="display">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>210</y>
+      <width>531</width>
+      <height>121</height>
+     </rect>
+    </property>
    </widget>
    <widget class="QPushButton" name="btn_quit_app">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>10</y>
+      <x>430</x>
+      <y>170</y>
       <width>80</width>
-      <height>23</height>
+      <height>24</height>
      </rect>
     </property>
-    <property name="toolTip">
-     <string>Quit application</string>
-    </property>
     <property name="text">
-     <string>Quit App.</string>
+     <string>quit</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btn_show_help">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>10</y>
-      <width>91</width>
-      <height>23</height>
+      <x>340</x>
+      <y>170</y>
+      <width>80</width>
+      <height>24</height>
      </rect>
     </property>
-    <property name="toolTip">
-     <string>Show help for specific user interface element. Click here, then click at soem UI element.</string>
-    </property>
     <property name="text">
-     <string>What is This</string>
+     <string>Show help</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="chb_dark_theme">
+   <widget class="QPushButton" name="btn_stop">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>10</y>
-      <width>151</width>
+      <x>60</x>
+      <y>120</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Stop</string>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="enable_ethernet">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>180</y>
+      <width>161</width>
       <height>21</height>
      </rect>
     </property>
-    <property name="toolTip">
-     <string>Enable Dark theme when checked</string>
-    </property>
     <property name="text">
-     <string>Toggle/Dark Theme</string>
+     <string>Enable Ethernet (NAT)</string>
     </property>
-   </widget>
-   <widget class="QPushButton" name="btn_install_icon">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>10</y>
-      <width>151</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Install Desktop Icon</string>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
@@ -456,8 +178,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>757</width>
-     <height>20</height>
+     <width>664</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
