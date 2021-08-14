@@ -20,6 +20,20 @@ AppMainWindow::AppMainWindow()
     this->btn_run = loader.find_child<QPushButton>("btn_run");
 
     this->proc = new QProcess(this);
+    this->timer = new QTimer(this);
+
+    QObject::connect(this->timer, &QTimer::timeout, [=]
+    {
+        bool flag = proc->state() == QProcess::Running;
+        loader.set_widget_disabled("btn_run", flag);
+        loader.set_widget_disabled("btn_stop", !flag);
+        loader.set_widget_disabled("entry_disk_path", flag);
+        loader.set_widget_disabled("enable_ethernet", flag);
+        loader.set_widget_disabled("enable_audio", flag);
+    });
+    // Run timer each 1.5 seconds (1500 milliseconds)
+    timer->start(1500);
+
 
     const auto program = QString{"qemu-system-x86_64"};
 

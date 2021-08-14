@@ -30,6 +30,7 @@ private:
     QSpinBox*        spin_memory;
     QCheckBox*       enable_audio;
     
+    QTimer*          timer;
 
     QProcess* proc;
 public:
