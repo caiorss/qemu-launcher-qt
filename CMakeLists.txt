@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.9)
-project(applauncher)
+project(qemu-launcher)
 
 #====== Global Configurations ==================#
 
@@ -58,19 +58,19 @@ add_executable( applauncher
                 src/appmainwindow.cpp
                 src/appmainwindow.hpp
 
-                src/tab_desktopbookmarks.cpp
-                src/tab_desktopbookmarks.hpp
+               # src/tab_desktopbookmarks.cpp
+               # src/tab_desktopbookmarks.hpp
 
-                # Class FileBookMarkItem
-                src/FileBookmarkItem.hpp
+             #  # Class FileBookMarkItem
+             #  src/FileBookmarkItem.hpp
 
                 # Class: FileBookMarkItemModel
-                src/filebookmarkitemmodel.cpp
-                src/filebookmarkitemmodel.hpp
+             #  src/filebookmarkitemmodel.cpp
+             #  src/filebookmarkitemmodel.hpp
 
                 # Class Tab_ApplicationLauncher
-                src/tab_applicationlauncher.cpp
-                src/tab_applicationlauncher.hpp
+             #  src/tab_applicationlauncher.cpp
+             #  src/tab_applicationlauncher.hpp
 
                 resources.qrc
                )           

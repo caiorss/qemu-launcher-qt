@@ -2,6 +2,7 @@
 #define APPMAINWINDOW_HPP
 
 #include <QtWidgets>
+#include <QProcess> 
 
 //------ Headers of helper classes and namespaces -------//
 #include <qxstl/event.hpp>
@@ -15,6 +16,7 @@
 #include "tab_desktopbookmarks.hpp"
 
 
+
 class AppMainWindow: public QMainWindow
 {
 private:
@@ -23,28 +25,19 @@ private:
 
     //======== TrayIcon =============================//
     QSystemTrayIcon* tray_icon;
+    QLineEdit*       entry_disk_path;
+    QPushButton*     btn_run;
+    QSpinBox*        spin_memory;
+    QCheckBox*       enable_audio;
+    
 
-    std::unique_ptr<Tab_DesktopBookmarks>    tab_deskbookmarks;
-    std::unique_ptr<Tab_ApplicationLauncher> tab_applauncher;
-
+    QProcess* proc;
 public:
 
 
     AppMainWindow();
     /// Make this window stay alwys on top
     void setWindowAlwaysOnTop();
-
-    QString get_settings_file();
-
-    void load_window_settings();
-
-    void save_window_settings();
-
-    /// Load application state
-    void load_settings();
-
-    /// Save application state
-    void save_settings();
 
     void dragEnterEvent(QDragEnterEvent* event) override;
 

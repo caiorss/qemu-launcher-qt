@@ -130,13 +130,15 @@ public:
     void on_double_clicked(QString widget_name, Receiver pReceiver, Method&& receiver_method)
     {
         Sender* pSender = form->findChild<Sender*>(widget_name);
-        if(pSender == nullptr){
-            using namespace std::string_literals;
-            throw std::runtime_error("Error: Unable to load widget named: <"s
-                                     + widget_name.toStdString()
-                                     + "> from the form file "s + formFile.toStdString());
-        }
         QObject::connect(pSender, &Sender::doubleClicked, pReceiver, receiver_method);
+    }
+
+    /** Returns true if a given checkbox is checked */
+    bool is_checkbox_checked(QString widget_name)
+    {
+        auto checkbox = this->find_child<QCheckBox>(widget_name);
+        return checkbox->checkState() == Qt::Checked;
+        // return checkbox->isChecked();
     }
 
 private:
