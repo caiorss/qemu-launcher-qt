@@ -11,3 +11,7 @@
 *.tar.gz
 build/*
 bin/*
+.kdev4/*
+_build/*
+log.*
+*.autosave
