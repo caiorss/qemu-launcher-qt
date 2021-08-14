@@ -1,0 +1,13 @@
+.vscode/*
+*.user
+*.exe
+*.dll
+*.ocw
+*.pyd
+*.bin
+*.so
+*.dylib
+*.tgz
+*.tar.gz
+build/*
+bin/*
