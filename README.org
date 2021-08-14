@@ -1,0 +1,73 @@
+* QAppLauncher 
+*** Description 
+
+ + Description:
+   + Application launcher and bookmark system for files and directories.
+
+ + Capabilities:
+
+   * Launch commands, applications and bookmark applications or
+     commands for launching later.
+
+   * Bookmark files and directories by dragging and dropping.
+
+   * Open bookmarked files with default-system application.
+
+   * Add small notes to bookmarked files.
+
+   * Tray icon => Click at the tray icon for hiding/showing the
+     application's window.
+
+*** Screenshots 
+
+ *Application Launcher Tab* 
+
+[[file:images/tab_applauncher.png][file:images/tab_applauncher.png]]
+
+ *Desktop Bookmarks Tab* 
+
+Just drag and drop files to the Desktop Bookmarks tab. The file can be
+opened either by double clicking at it in the list view widget or by
+clicking at the button add. 
+
+[[file:images/tab_desktop_bookmarks.png][file:images/tab_desktop_bookmarks.png]]
+
+ *Tray Icon* 
+
+[[file:images/tray_icon.png][file:images/tray_icon.png]] 
+
+*** Building 
+
+Requirements: Any compiler supporting C++17 and QT5 Widgets library. 
+
+Build: Just run $ make release 
+
+#+BEGIN_SRC sh 
+  $ make release
+
+  cmake -B_build -H. -DCMAKE_BUILD_TYPE=Release
+  -- The C compiler identification is GNU 8.3.1
+  -- The CXX compiler identification is GNU 8.3.1
+  -- Check for working C compiler: /usr/lib64/ccache/cc
+  -- Check for working C compiler: /usr/lib64/ccache/cc -- works
+  -- Detecting C compiler ABI info
+  -- Detecting C compiler ABI info - done
+    ... ... ... ... 
+
+  [100%] Linking CXX executable applauncher
+  gmake[3]: Leaving directory '/home/archbox/projects/qt-applauncher/_build'
+  [100%] Built target applauncher
+  gmake[2]: Leaving directory '/home/archbox/projects/qt-applauncher/_build'
+  gmake[1]: Leaving directory '/home/archbox/projects/qt-applauncher/_build'
+#+END_SRC
+
+Running: 
+
+#+BEGIN_SRC sh 
+ $ bin/applauncher 
+#+END_SRC
+
+*** Repository 
+
+ + https://github.com/caiorss/qapplauncher 
+
