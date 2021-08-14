@@ -29,24 +29,30 @@ AppMainWindow::AppMainWindow()
 
         QString memory = QString::number( this->spin_memory->value() );
 
-        bool audio_enabled = loader.is_checkbox_checked("enable_audio");
+        
 
         auto list = QStringList{"-enable-kvm"
                             , "-m",      memory      // RAM Memory assigned to VM  
                             , "-smp",    "2"         // Number of cores
                             , "-net",    "nic"
-                            , "-net",    "user"
+                           // , "-net",    "user"
                             , "-usb"      
                             , "-device", "usb-tablet"
                             , "-boot",   "d"          // CDROM boot 
                             , "-cdrom",   path
                             };
 
-        if(audio_enabled){
+        if( loader.is_checkbox_checked("enable_audio") ){
+
             std::cout << " [TRACE] Audo enabled Ok. " << std::endl;
             list.push_back("-audiodev"); list.push_back("pa,id=snd0");
             list.push_back("-device");  list.push_back("ich9-intel-hda");
             list.push_back("-device");  list.push_back("hda-output,audiodev=snd0");
+        }
+
+        if( loader.is_checkbox_checked("enable_ethernet") )
+        {
+            list.push_back("-net"); list.push_back("user");
         }
         
         // QMessageBox::about(nullptr, "Title", "Button clicked.");
