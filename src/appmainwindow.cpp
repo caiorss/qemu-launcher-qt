@@ -22,6 +22,7 @@ AppMainWindow::AppMainWindow()
     this->btn_run = loader.find_child<QPushButton>(BTN_RUN);
 
     this->proc = new QProcess(this);
+ 
 
     QObject::connect(proc, &QProcess::stateChanged, [=]
     {
@@ -44,13 +45,7 @@ AppMainWindow::AppMainWindow()
         {
             loader.set_widget_setText(LABEL_STATUS_BAR, "Virtual machine running.");
 
-            loader.set_widget_setText(TEXTEDIT_DISPLAY, R"(
-    Connect to QEMU console for the virtual machine using the command: 
-
-        $  socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
-    or:
-        $  rlwrap socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
-    )");
+            loader.set_widget_setText(TEXTEDIT_DISPLAY, display_text);
         }   
 
 
@@ -85,6 +80,19 @@ AppMainWindow::AppMainWindow()
         machine_uuid = machine_uuid.replace("{", "").replace("}", "");
 
         std::cout << " [TRACE] UUID = " << machine_uuid.toStdString() << "\n";
+
+    display_text = QString(R"(
+         -------------------------------------------------
+    Connect to QEMU console for the virtual machine using the command: 
+
+        $  socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
+    or:
+        $  rlwrap socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
+
+         ----------------------------------------------
+       Machine Name = %1
+       Machine UUID = %2
+    )").arg(vmname, machine_uuid);
 
         auto list = QStringList{
                         "-enable-kvm"            // Enable KVM (Kernel Virtual Machine) accelerator

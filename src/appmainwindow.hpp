@@ -44,6 +44,7 @@ private:
     QTimer*          timer;
 
     QProcess* proc;
+    QString display_text = "";
 public:
 
 
