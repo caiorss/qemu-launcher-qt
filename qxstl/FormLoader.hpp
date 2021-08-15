@@ -141,12 +141,16 @@ public:
         // return checkbox->isChecked();
     }
 
+    /** If the flag is true, disables widget. 
+     * It is a wrapper to QWidget::setDisabled(flag)
+     * 
+     ****************************************************/
     void set_widget_disabled(QString widget_name, bool flag)
     {
         auto widget = this->find_child<QWidget>(widget_name);
         widget->setDisabled(flag);
     }
-    
+
 private:
 
     /** Ensure that widget was loaded from XML. Throws exception if the widget
