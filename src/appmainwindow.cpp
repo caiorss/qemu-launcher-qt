@@ -37,13 +37,14 @@ AppMainWindow::AppMainWindow()
         {
             std::fprintf(stdout, " [INFO] Process stopped. Ok. \n");
             loader.set_widget_setText(LABEL_STATUS_BAR, "Virtual machine stopped.");
-            loader.set_widget_setText("display", "");
+            loader.set_widget_setText(TEXTEDIT_DISPLAY, "");
         }   
+
         if( proc->state() == QProcess::Running) 
         {
             loader.set_widget_setText(LABEL_STATUS_BAR, "Virtual machine running.");
 
-            loader.set_widget_setText("display", R"(
+            loader.set_widget_setText(TEXTEDIT_DISPLAY, R"(
     Connect to QEMU console for the virtual machine using the command: 
 
         $  socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
