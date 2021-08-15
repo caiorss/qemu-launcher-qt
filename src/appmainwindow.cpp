@@ -30,9 +30,17 @@ AppMainWindow::AppMainWindow()
         loader.set_widget_disabled(CHECKBOX_ETHERNET, flag);
         loader.set_widget_disabled(CHECKBOX_AUDIO, flag);
 
-        if( proc->state() == QProcess::NotRunning) {
+        if( proc->state() == QProcess::NotRunning) 
+        {
             std::fprintf(stdout, " [INFO] Process stopped. Ok. \n");
+            loader.set_widget_setText(LABEL_STATUS_BAR, "Virtual machine stopped.");
         }   
+        if( proc->state() == QProcess::Running) 
+        {
+            loader.set_widget_setText(LABEL_STATUS_BAR, "Virtual machine running.");
+        }   
+
+
     });
 
     const auto program = QString{"qemu-system-x86_64"};
