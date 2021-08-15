@@ -185,7 +185,7 @@
      <string>Status:</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_statusbar">
+   <widget class="QLabel" name="label_status_bar">
     <property name="geometry">
      <rect>
       <x>80</x>
