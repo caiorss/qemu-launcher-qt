@@ -51,7 +51,7 @@ endfunction()
 
 # Brief: Main executable - GUI Graphical User Interface
 #-----------------------------------------------------------
-add_executable( applauncher
+add_executable( qemu-launcher
 
                 src/main.cpp
 
@@ -76,9 +76,9 @@ add_executable( applauncher
                )           
 # target_include_directories(applauncher PUBLIC .)
 # target_link_libraries(applauncher qtutils_ide)
-copy_after_build( applauncher )
+copy_after_build( qemu-launcher )
 
-target_link_libraries(applauncher
+target_link_libraries( qemu-launcher 
     Qt5::Core Qt5::Widgets Qt5::UiTools Qt5::Network)
 
-copy_after_build( applauncher )
+copy_after_build( qemu-launcher )
