@@ -72,7 +72,7 @@ AppMainWindow::AppMainWindow()
     loader.on_button_clicked(BTN_RUN, [=]
     {
         QString path = this->entry_disk_path->text();
-        QString vmname = QFileInfo(path).fileName();
+        QString vmname = QFileInfo(path).fileName().section(".", 0, 0);
 
         QString memory = QString::number( this->spin_memory->value() );
 
@@ -81,15 +81,17 @@ AppMainWindow::AppMainWindow()
 
         std::cout << " [TRACE] UUID = " << machine_uuid.toStdString() << "\n";
 
-    display_text = QString(R"(
-         -------------------------------------------------
+    display_text = QString(R"( 
+  [-------------------------------------------------------------]
+
     Connect to QEMU console for the virtual machine using the command: 
 
         $  socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
     or:
         $  rlwrap socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
 
-         ----------------------------------------------
+  [-------------------------------------------------------------]
+
        Machine Name = %1
        Machine UUID = %2
     )").arg(vmname, machine_uuid);
