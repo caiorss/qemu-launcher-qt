@@ -38,7 +38,18 @@ AppMainWindow::AppMainWindow()
         {
             std::fprintf(stdout, " [INFO] Process stopped. Ok. \n");
             loader.set_widget_setText(LABEL_STATUS_BAR, "Virtual machine stopped.");
-            loader.set_widget_setText(TEXTEDIT_DISPLAY, "");
+
+            QString qemu_stdout = this->proc->readAllStandardOutput();
+            QString qemu_stderr = this->proc->readAllStandardError();
+            QString output;
+
+            if( this->proc->exitCode() != 0)
+            {
+                output = " [QEMU ERROR] \n";
+            }
+
+            output = output +  qemu_stdout + "\n\n" + qemu_stderr;
+            loader.set_widget_setText(TEXTEDIT_DISPLAY, output);
         }   
 
         if( proc->state() == QProcess::Running) 
@@ -74,8 +85,6 @@ AppMainWindow::AppMainWindow()
         QString path = this->entry_disk_path->text();
         QString vmname = QFileInfo(path).fileName().section(".", 0, 0);
 
-        QString memory = QString::number( this->spin_memory->value() );
-
         QString machine_uuid = QUuid::createUuid().toString(); 
         machine_uuid = machine_uuid.replace("{", "").replace("}", "");
 
@@ -98,13 +107,11 @@ AppMainWindow::AppMainWindow()
 
         auto list = QStringList{
                         "-enable-kvm"            // Enable KVM (Kernel Virtual Machine) accelerator
-                        , "-m",      memory      // RAM Memory assigned to VM  
                         , "-smp",    "2"         // Number of cores
                         , "-net",    "nic"       // Add network interface card (NIC)
                         , "-usb"      
                         , "-device", "usb-tablet"
                         , "-boot",   "d"          // CDROM boot 
-                        , "-cdrom",   path        // Path to ISO disk cd/dvd image
 
                         // Daemonize => Uncomment the next line for daemonizing QEMU
                         // , "-daemonize"
@@ -129,6 +136,47 @@ AppMainWindow::AppMainWindow()
                         // --------------------------------------------
                         , "-monitor", "unix:/tmp/qemu-monitor-socket.sock,server,nowait"
                         };
+
+        if( path.endsWith(".iso") )
+        {
+            // Path to ISO disk cd/dvd image
+            list.push_back("-cdrom"); list.push_back(path);
+        }
+
+        if( path.endsWith("qcow") )
+        {
+            // -device ide-driver,..... ... 
+            list.push_back("-device");
+            list.push_back("ide-drive,bus=ide.0,drive=MacHDD");
+
+            // -drive id=MacHDD,format=qcow2,if=none,file=disk-image.qcow
+            list.push_back("-drive");
+            list.push_back( QString("id=MacHDD,format=qcow2,if=none,file=") + path);
+
+        }
+
+        if( loader.is_checkbox_checked(CHECKBOX_WINDOWS) )
+        {
+            // -smbios-type 2 
+            list.push_back("-smbios"); list.push_back("type=2");
+            
+            // -device ahci,id=ide
+            list.push_back("-device"); list.push_back("ahci,id=ide");
+
+            // -cpu Penryn,kvm=off,vendor=GenuineIntel 
+            list.push_back("-cpu"); 
+            list.push_back("Penryn,kvm=off,vendor=GenuineIntel");
+
+            if( this->spin_memory->value() < 4096 )
+            {
+                this->spin_memory->setValue(4096);
+            } 
+        }
+
+        // -m <RAM-MEMORY-AMOUNT>
+        // RAM Memory assigned to VM  
+        QString memory = QString::number( this->spin_memory->value() );
+        list.push_back("-m"); list.push_back(memory);  
 
         if( loader.is_checkbox_checked("enable_audio") ){
 
