@@ -8,13 +8,14 @@
 #include <QApplication>
 #include "appmainwindow.hpp"
 
+constexpr const char* APP_NAME = "qqemu";
 
 int main(int argc, char** argv)
 {
     std::cout << " [INFO] Starting Application" << std::endl;
 
     QApplication app(argc, argv);
-    app.setApplicationName("qapplauncher");   
+    app.setApplicationName(APP_NAME);   
 
     AppMainWindow maingui;
     maingui.setWindowIcon(QIcon(":/assets/appicon.png"));
