@@ -1,6 +1,8 @@
 #include <qxstl/serialization.hpp>
 #include <qxstl/FormLoader.hpp>
 
+#include <QUuid>
+
 #include "appmainwindow.hpp"
 
 namespace qx = qxstl::event;
@@ -29,15 +31,25 @@ AppMainWindow::AppMainWindow()
         loader.set_widget_disabled(ENTRY_DISK_PATH, flag);
         loader.set_widget_disabled(CHECKBOX_ETHERNET, flag);
         loader.set_widget_disabled(CHECKBOX_AUDIO, flag);
+        loader.set_widget_disabled(SPINBOX_MEMORY, flag);
 
         if( proc->state() == QProcess::NotRunning) 
         {
             std::fprintf(stdout, " [INFO] Process stopped. Ok. \n");
             loader.set_widget_setText(LABEL_STATUS_BAR, "Virtual machine stopped.");
+            loader.set_widget_setText("display", "");
         }   
         if( proc->state() == QProcess::Running) 
         {
             loader.set_widget_setText(LABEL_STATUS_BAR, "Virtual machine running.");
+
+            loader.set_widget_setText("display", R"(
+    Connect to QEMU console for the virtual machine using the command: 
+
+        $  socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
+    or:
+        $  rlwrap socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
+    )");
         }   
 
 
@@ -67,18 +79,44 @@ AppMainWindow::AppMainWindow()
 
         QString memory = QString::number( this->spin_memory->value() );
 
-        
+        QString machine_uuid = QUuid::createUuid().toString(); 
+        machine_uuid = machine_uuid.replace("{", "").replace("}", "");
+
+        std::cout << " [TRACE] UUID = " << machine_uuid.toStdString() << "\n";
 
         auto list = QStringList{
-                            "-enable-kvm"            // Enable KVM (Kernel Virtual Machine) accelerator
-                            , "-m",      memory      // RAM Memory assigned to VM  
-                            , "-smp",    "2"         // Number of cores
-                            , "-net",    "nic"       // Add network interface card (NIC)
-                            , "-usb"      
-                            , "-device", "usb-tablet"
-                            , "-boot",   "d"          // CDROM boot 
-                            , "-cdrom",   path        // Path to ISO disk cd/dvd image
-                            };
+                        "-enable-kvm"            // Enable KVM (Kernel Virtual Machine) accelerator
+                        , "-m",      memory      // RAM Memory assigned to VM  
+                        , "-smp",    "2"         // Number of cores
+                        , "-net",    "nic"       // Add network interface card (NIC)
+                        , "-usb"      
+                        , "-device", "usb-tablet"
+                        , "-boot",   "d"          // CDROM boot 
+                        , "-cdrom",   path        // Path to ISO disk cd/dvd image
+
+                        // Daemonize => Uncomment the next line for daemonizing QEMU
+                        // , "-daemonize"
+
+                        // Define process name for this virtual machine 
+                        // See: https://blog.stefan-koch.name/2020/05/24/managing-qemu-vms
+                        // 
+                        // -name <VIRTUAL-MACHINE-NAME>,process=<PROCESS-NAME>
+                        , "-name", "qemu-virtual-machine,process=qemu-vm-worker"
+
+                        // Universal unique identifier for virtual machine
+                        , "-uuid", machine_uuid //"909fa9bb-a57f-4f9a-a323-e4a74595b2f9"
+
+                        // QEMU QMP (Protocol)
+                        //  => https://wiki.qemu.org/QMP
+                        //  => https://git.qemu.org/?p=qemu.git;a=blob_plain;f=docs/interop/qmp-intro.txt;hb=HEAD
+                        // ----------------------------------
+                        , "-chardev", "socket,id=mon1,host=localhost,port=4444,server=on,wait=off"
+                        , "-mon", "chardev=mon1,mode=control,pretty=on"
+
+                        // Run QEMU monitor console using unix domain socket 'file'
+                        // --------------------------------------------
+                        , "-monitor", "unix:/tmp/qemu-monitor-socket.sock,server,nowait"
+                        };
 
         if( loader.is_checkbox_checked("enable_audio") ){
 
@@ -90,7 +128,7 @@ AppMainWindow::AppMainWindow()
 
         if( loader.is_checkbox_checked("enable_ethernet") )
         {
-            list.push_back("-net"); list.push_back("user");
+            list.push_back("-net"); list.push_back("user,id=internent");
         }
         
         // QMessageBox::about(nullptr, "Title", "Button clicked.");
