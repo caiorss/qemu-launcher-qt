@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>664</width>
-    <height>406</height>
+    <height>456</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -51,12 +51,12 @@
      <rect>
       <x>60</x>
       <y>10</y>
-      <width>171</width>
+      <width>201</width>
       <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Path to virtual ISO image</string>
+     <string>Path to ISO or QCOW disk image</string>
     </property>
    </widget>
    <widget class="QSpinBox" name="spin_memory">
@@ -105,9 +105,9 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>240</y>
+      <y>250</y>
       <width>551</width>
-      <height>91</height>
+      <height>131</height>
      </rect>
     </property>
     <property name="font">
@@ -171,7 +171,7 @@
     <property name="geometry">
      <rect>
       <x>60</x>
-      <y>180</y>
+      <y>190</y>
       <width>161</width>
       <height>21</height>
      </rect>
@@ -187,7 +187,7 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>350</y>
+      <y>390</y>
       <width>51</width>
       <height>16</height>
      </rect>
@@ -216,7 +216,7 @@
     <property name="geometry">
      <rect>
       <x>80</x>
-      <y>350</y>
+      <y>390</y>
       <width>501</width>
       <height>24</height>
      </rect>
@@ -226,6 +226,25 @@
     </property>
     <property name="readOnly">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="enable_windows">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>220</y>
+      <width>211</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Virtual Machine is Windows NT</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>
