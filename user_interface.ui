@@ -104,11 +104,16 @@
    <widget class="QTextEdit" name="display">
     <property name="geometry">
      <rect>
-      <x>80</x>
+      <x>30</x>
       <y>240</y>
-      <width>501</width>
+      <width>551</width>
       <height>91</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Monospace</family>
+     </font>
     </property>
     <property name="autoFillBackground">
      <bool>true</bool>
