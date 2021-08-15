@@ -77,6 +77,7 @@ AppMainWindow::AppMainWindow()
     loader.on_button_clicked(BTN_RUN, [=]
     {
         QString path = this->entry_disk_path->text();
+        QString vmname = QFileInfo(path).fileName();
 
         QString memory = QString::number( this->spin_memory->value() );
 
@@ -102,7 +103,7 @@ AppMainWindow::AppMainWindow()
                         // See: https://blog.stefan-koch.name/2020/05/24/managing-qemu-vms
                         // 
                         // -name <VIRTUAL-MACHINE-NAME>,process=<PROCESS-NAME>
-                        , "-name", "qemu-virtual-machine,process=qemu-vm-worker"
+                        , "-name", QString("qemu-vm-%1,process=qemu-proc-%1").arg(vmname, vmname)
 
                         // Universal unique identifier for virtual machine
                         , "-uuid", machine_uuid //"909fa9bb-a57f-4f9a-a323-e4a74595b2f9"
