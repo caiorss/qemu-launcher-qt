@@ -151,6 +151,19 @@ public:
         widget->setDisabled(flag);
     }
 
+    void set_widget_setText(QString name, QString text)
+    {        
+        QWidget* self = this->find_child<QWidget>(name);
+        if( set_text<QLabel*>(self, text))           return;
+        if( set_text<QLineEdit*>(self, text))        return;
+        if( set_text<QTextEdit*>(self, text))        return; 
+        if( set_text<QMessageBox*>(self, text))      return; 
+        if( set_text<QAbstractButton*>(self, text) ) return;    
+        // logger().log() << " [TRACE] Called function " << __FUNCTION__ << std::endl;
+        self->setWindowTitle(text);  
+    }
+
+
 private:
 
     /** Ensure that widget was loaded from XML. Throws exception if the widget
@@ -164,6 +177,16 @@ private:
         throw std::runtime_error("Error: Unable to load widget named: <"s
                                  + widget_name.toStdString()
                                  + "> from the form file "s + formFile.toStdString());
+    }
+
+    template<typename T>
+    bool set_text(QWidget* self, QString text)
+    {
+        auto obj = qobject_cast<T>(self);
+        // Early return on Error. 
+        if(obj == nullptr ){ return false;  }    
+        obj->setText(text);
+        return true;
     }
 
 };
