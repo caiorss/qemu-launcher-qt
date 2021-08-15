@@ -12,32 +12,37 @@ AppMainWindow::AppMainWindow()
     form = loader.GetForm();
 
     // Load widget from XML gui layout file by unique identifier name. 
-    this->entry_disk_path = loader.find_child<QLineEdit>("entry_disk_path");
+    this->entry_disk_path = loader.find_child<QLineEdit>(ENTRY_DISK_PATH);
     this->entry_disk_path->setText("Loaded Ok.");
 
-    this->spin_memory = loader.find_child<QSpinBox>("spin_memory");
+    this->spin_memory = loader.find_child<QSpinBox>(SPINBOX_MEMORY);
 
-    this->btn_run = loader.find_child<QPushButton>("btn_run");
+    this->btn_run = loader.find_child<QPushButton>(BTN_RUN);
 
     this->proc = new QProcess(this);
-    this->timer = new QTimer(this);
 
-    QObject::connect(this->timer, &QTimer::timeout, [=]
+    QObject::connect(proc, &QProcess::stateChanged, [=]
     {
         bool flag = proc->state() == QProcess::Running;
-        loader.set_widget_disabled("btn_run", flag);
-        loader.set_widget_disabled("btn_stop", !flag);
-        loader.set_widget_disabled("entry_disk_path", flag);
-        loader.set_widget_disabled("enable_ethernet", flag);
-        loader.set_widget_disabled("enable_audio", flag);
-    });
-    // Run timer each 1.5 seconds (1500 milliseconds)
-    timer->start(1500);
+        loader.set_widget_disabled(BTN_RUN, flag);
+        loader.set_widget_disabled(BTN_STOP, !flag);
+        loader.set_widget_disabled(ENTRY_DISK_PATH, flag);
+        loader.set_widget_disabled(CHECKBOX_ETHERNET, flag);
+        loader.set_widget_disabled(CHECKBOX_AUDIO, flag);
 
+        if( proc->state() == QProcess::NotRunning) {
+            std::fprintf(stdout, " [INFO] Process stopped. Ok. \n");
+        }   
+    });
 
     const auto program = QString{"qemu-system-x86_64"};
 
-    loader.on_button_clicked("btn_run", [=]
+    loader.on_button_clicked(BTN_STOP, [=]
+    {
+        this->proc->kill();
+    });
+
+    loader.on_button_clicked(BTN_RUN, [=]
     {
         QString path = this->entry_disk_path->text();
 
@@ -45,15 +50,15 @@ AppMainWindow::AppMainWindow()
 
         
 
-        auto list = QStringList{"-enable-kvm"
+        auto list = QStringList{
+                            "-enable-kvm"            // Enable KVM (Kernel Virtual Machine) accelerator
                             , "-m",      memory      // RAM Memory assigned to VM  
                             , "-smp",    "2"         // Number of cores
-                            , "-net",    "nic"
-                           // , "-net",    "user"
+                            , "-net",    "nic"       // Add network interface card (NIC)
                             , "-usb"      
                             , "-device", "usb-tablet"
                             , "-boot",   "d"          // CDROM boot 
-                            , "-cdrom",   path
+                            , "-cdrom",   path        // Path to ISO disk cd/dvd image
                             };
 
         if( loader.is_checkbox_checked("enable_audio") ){

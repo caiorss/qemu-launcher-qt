@@ -23,6 +23,7 @@ constexpr const char* LABEL_STATUS_BAR    = "label_status_bar";
 constexpr const char* CHECKBOX_ETHERNET   = "enable_ethernet";
 constexpr const char* CHECKBOX_AUDIO      = "enable_audio";
 constexpr const char* ENTRY_DISK_PATH     = "entry_disk_path";
+constexpr const char* SPINBOX_MEMORY      = "spin_memory";
 
 class AppMainWindow: public QMainWindow
 {
@@ -31,6 +32,7 @@ private:
     QWidget*     form;
 
     //======== TrayIcon =============================//
+
     QSystemTrayIcon* tray_icon;
     QLineEdit*       entry_disk_path;
     QPushButton*     btn_run;
