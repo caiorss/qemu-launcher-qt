@@ -19,6 +19,7 @@
 constexpr const char* BTN_QUIT_APP        = "btn_quit_app";
 constexpr const char* BTN_RUN             = "btn_run";
 constexpr const char* BTN_STOP            = "btn_stop";
+constexpr const char* BTN_INSTALL_ICON    = "btn_icon";
 constexpr const char* LABEL_STATUS_BAR    = "label_status_bar";
 constexpr const char* CHECKBOX_ETHERNET   = "enable_ethernet";
 constexpr const char* CHECKBOX_AUDIO      = "enable_audio";

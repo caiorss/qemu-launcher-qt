@@ -50,6 +50,17 @@ AppMainWindow::AppMainWindow()
         this->proc->kill();
     });
 
+    loader.on_button_clicked(BTN_INSTALL_ICON, []()
+    {
+        QString desktop_path =
+            QStandardPaths::standardLocations(QStandardPaths::DesktopLocation)[0];
+
+        qx::create_linux_desktop_shortcut(
+              desktop_path
+            , ":/assets/appicon.png"
+            , "QT front-end for QEMU virtual machine emulator.");
+    });
+
     loader.on_button_clicked(BTN_RUN, [=]
     {
         QString path = this->entry_disk_path->text();
