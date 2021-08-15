@@ -16,6 +16,13 @@
 #include "tab_desktopbookmarks.hpp"
 
 
+constexpr const char* BTN_QUIT_APP        = "btn_quit_app";
+constexpr const char* BTN_RUN             = "btn_run";
+constexpr const char* BTN_STOP            = "btn_stop";
+constexpr const char* LABEL_STATUS_BAR    = "label_status_bar";
+constexpr const char* CHECKBOX_ETHERNET   = "enable_ethernet";
+constexpr const char* CHECKBOX_AUDIO      = "enable_audio";
+constexpr const char* ENTRY_DISK_PATH     = "entry_disk_path";
 
 class AppMainWindow: public QMainWindow
 {
