@@ -170,6 +170,13 @@ public:
         self->addItem(item);
     }
 
+    /// @brief Get selected item as string
+    QString combobox_selected_text(QString name)
+    {
+        auto self = this->find_child<QComboBox>(name);
+        return self->currentText();
+    }
+
 
 private:
 
