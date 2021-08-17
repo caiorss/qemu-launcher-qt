@@ -20,14 +20,23 @@ constexpr const char* BTN_QUIT_APP        = "btn_quit_app";
 constexpr const char* BTN_RUN             = "btn_run";
 constexpr const char* BTN_STOP            = "btn_stop";
 constexpr const char* BTN_INSTALL_ICON    = "btn_icon";
+constexpr const char* BTN_FILE_ISO  = "btn_file_iso";
+constexpr const char* BTN_FILE_QCOW = "btn_file_qcow";
+constexpr const char* BTN_SHOW_HELP = "btn_show_help";
+
 constexpr const char* LABEL_STATUS_BAR    = "label_status_bar";
 constexpr const char* CHECKBOX_ETHERNET   = "enable_ethernet";
 constexpr const char* CHECKBOX_AUDIO      = "enable_audio";
 constexpr const char* CHECKBOX_WINDOWS    = "enable_windows";
-constexpr const char* ENTRY_DISK_PATH     = "entry_disk_path_iso";
+
+constexpr const char* ENTRY_PATH_ISO     = "entry_disk_path_iso";
+constexpr const char* ENTRY_PATH_QCOW     = "entry_disk_path_qcow";
+
 constexpr const char* SPINBOX_MEMORY      = "spin_memory";
 constexpr const char* TEXTEDIT_DISPLAY    = "display";
 constexpr const char* COMBOBOX_QEMU       = "combobox_qemu";
+
+
 
 class AppMainWindow: public QMainWindow
 {

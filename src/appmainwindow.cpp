@@ -14,7 +14,7 @@ AppMainWindow::AppMainWindow()
     loader.combobox_add_item(COMBOBOX_QEMU, "qemu-system-x86_64");
     loader.combobox_add_item(COMBOBOX_QEMU, "qemu-system-i386");
     // Load widget from XML gui layout file by unique identifier name. 
-    this->entry_disk_path = loader.find_widget<QLineEdit>(ENTRY_DISK_PATH);
+    this->entry_disk_path = loader.find_widget<QLineEdit>(ENTRY_PATH_ISO);
     this->spin_memory = loader.find_widget<QSpinBox>(SPINBOX_MEMORY);
     this->btn_run = loader.find_widget<QPushButton>(BTN_RUN);
     this->proc = new QProcess(this);
@@ -24,6 +24,28 @@ AppMainWindow::AppMainWindow()
     loader.on_button_clicked(BTN_STOP, this, &AppMainWindow::qemu_kill_process);
     loader.on_button_clicked(BTN_INSTALL_ICON, this, &AppMainWindow::install_desktop_icon);
     loader.on_button_clicked(BTN_RUN, this, &AppMainWindow::qemu_run_process);
+    loader.on_button_clicked(BTN_SHOW_HELP, &QWhatsThis::enterWhatsThisMode);
+
+    loader.on_button_clicked(BTN_FILE_ISO, [=]{
+        QString file = QFileDialog::getOpenFileName(this
+                                                , "Select a ISO disk image fike."
+                                                , "/home"
+                                                , "ISO images (*.iso)");
+
+        loader.widget_setText(ENTRY_PATH_ISO, file);
+    });
+
+
+    loader.on_button_clicked(BTN_FILE_QCOW, [=]{
+        QString file = QFileDialog::getOpenFileName(this
+                                                , "Select a QCOW disk image fike."
+                                                , "/home"
+                                                , "QCOW disk images (*.qcow *.qcow2)");
+
+        loader.widget_setText(ENTRY_PATH_QCOW, file);
+    });
+
+
 
     // Enable Drag and Drop Event
     this->setAcceptDrops(true);
@@ -36,7 +58,6 @@ AppMainWindow::AppMainWindow()
                                  QApplication::quit();
                              });
 
-    loader.on_button_clicked("btn_show_help", &QWhatsThis::enterWhatsThisMode);
 
 
     //========= Create Tray Icon =======================//
@@ -151,11 +172,11 @@ void AppMainWindow::qemu_run_process()
     display_text = QString(R"( 
   [-------------------------------------------------------------]
 
-    Connect to QEMU console for the virtual machine using the command: 
+Connect to QEMU console for the virtual machine using the command: 
 
-        $  socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
-    or:
-        $  rlwrap socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
+    $  socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
+or:
+    $  rlwrap socat STDIO unix-connect:/tmp/qemu-monitor-socket.sock
 
   [-------------------------------------------------------------]
 
@@ -274,7 +295,7 @@ void AppMainWindow::qemu_state_changed()
     bool flag = proc->state() == QProcess::Running;
     loader.widget_set_disabled(BTN_RUN, flag);
     loader.widget_set_disabled(BTN_STOP, !flag);
-    loader.widget_set_disabled(ENTRY_DISK_PATH, flag);
+    loader.widget_set_disabled(ENTRY_PATH_ISO, flag);
     loader.widget_set_disabled(CHECKBOX_ETHERNET, flag);
     loader.widget_set_disabled(CHECKBOX_AUDIO, flag);
     loader.widget_set_disabled(SPINBOX_MEMORY, flag);
