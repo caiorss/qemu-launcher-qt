@@ -180,6 +180,15 @@ public:
         return self->currentText();
     }
 
+    /// @brief Install event handler, that show a not-implemented message box, in a button. 
+    void button_no_implemented(QString name)
+    {
+        this->on_button_clicked(name, [&]{
+            QMessageBox msbgox;
+            msbgox.setText("Error: this functionality was not implemented yet.");
+            msbgox.exec();
+        });
+    }
 
 private:
 
