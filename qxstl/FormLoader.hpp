@@ -166,6 +166,12 @@ public:
         self->setWindowTitle(text);  
     }
 
+    QString lineEdit_text(QString name)
+    {
+        auto self = this->find_widget<QLineEdit>(name);
+        return self->text();
+    }
+
     /// @brief Add items to a combobox.
     void combobox_add_item(QString name, QString item)
     {
