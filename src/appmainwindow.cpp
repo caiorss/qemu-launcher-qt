@@ -30,13 +30,13 @@ AppMainWindow::AppMainWindow()
     QObject::connect(proc, &QProcess::stateChanged, [=]
     {
         bool flag = proc->state() == QProcess::Running;
-        loader.set_widget_disabled(BTN_RUN, flag);
-        loader.set_widget_disabled(BTN_STOP, !flag);
-        loader.set_widget_disabled(ENTRY_DISK_PATH, flag);
-        loader.set_widget_disabled(CHECKBOX_ETHERNET, flag);
-        loader.set_widget_disabled(CHECKBOX_AUDIO, flag);
-        loader.set_widget_disabled(SPINBOX_MEMORY, flag);
-        loader.set_widget_disabled(COMBOBOX_QEMU, flag);
+        loader.widget_set_disabled(BTN_RUN, flag);
+        loader.widget_set_disabled(BTN_STOP, !flag);
+        loader.widget_set_disabled(ENTRY_DISK_PATH, flag);
+        loader.widget_set_disabled(CHECKBOX_ETHERNET, flag);
+        loader.widget_set_disabled(CHECKBOX_AUDIO, flag);
+        loader.widget_set_disabled(SPINBOX_MEMORY, flag);
+        loader.widget_set_disabled(COMBOBOX_QEMU, flag);
 
         if( proc->state() == QProcess::NotRunning) 
         {
