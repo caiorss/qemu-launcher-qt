@@ -136,7 +136,7 @@ public:
     }
 
     /** Returns true if a given checkbox is checked */
-    bool is_checkbox_checked(QString widget_name)
+    bool checkbox_is_checked(QString widget_name)
     {
         auto checkbox = this->find_child<QCheckBox>(widget_name);
         return checkbox->checkState() == Qt::Checked;

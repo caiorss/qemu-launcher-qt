@@ -162,7 +162,7 @@ AppMainWindow::AppMainWindow()
 
         }
 
-        if( loader.is_checkbox_checked(CHECKBOX_WINDOWS) )
+        if( loader.checkbox_is_checked(CHECKBOX_WINDOWS) )
         {
             // -smbios-type 2 
             list.push_back("-smbios"); list.push_back("type=2");
@@ -185,7 +185,7 @@ AppMainWindow::AppMainWindow()
         QString memory = QString::number( this->spin_memory->value() );
         list.push_back("-m"); list.push_back(memory);  
 
-        if( loader.is_checkbox_checked("enable_audio") ){
+        if( loader.checkbox_is_checked("enable_audio") ){
 
             std::cout << " [TRACE] Audo enabled Ok. " << std::endl;
             list.push_back("-audiodev"); list.push_back("pa,id=snd0");
@@ -193,7 +193,7 @@ AppMainWindow::AppMainWindow()
             list.push_back("-device");  list.push_back("hda-output,audiodev=snd0");
         }
 
-        if( loader.is_checkbox_checked(CHECKBOX_ETHERNET) )
+        if( loader.checkbox_is_checked(CHECKBOX_ETHERNET) )
         {
             list.push_back("-net"); list.push_back("user,id=internent");
         }
