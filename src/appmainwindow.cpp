@@ -161,13 +161,15 @@ void AppMainWindow::qemu_run_process()
     const auto program = loader.combobox_selected_text(COMBOBOX_QEMU);
     std::cout << " [TRACE] Program = " << program.toStdString() << '\n';
 
-    QString path = this->entry_disk_path->text();
-    QString vmname = QFileInfo(path).fileName().section(".", 0, 0);
+    QString path_iso = loader.lineEdit_text(ENTRY_PATH_ISO).trimmed();
+    QString path_qcow = loader.lineEdit_text(ENTRY_PATH_QCOW).trimmed();
+
+    QString vmname = QFileInfo(path_iso).fileName().section(".", 0, 0);
 
     QString machine_uuid = QUuid::createUuid().toString();
     machine_uuid = machine_uuid.replace("{", "").replace("}", "");
 
-    std::cout << " [TRACE] UUID = " << machine_uuid.toStdString() << "\n";
+    // std::cout << " [TRACE] UUID = " << machine_uuid.toStdString() << "\n";
 
     display_text = QString(R"( 
   [-------------------------------------------------------------]
@@ -180,10 +182,9 @@ or:
 
   [-------------------------------------------------------------]
 
-       Machine Name = %1
-       Machine UUID = %2
-    )")
-                       .arg(vmname, machine_uuid);
+    Machine Name = %1
+    Machine UUID = %2
+    )").arg(vmname, machine_uuid);
 
     auto list = QStringList{
         "-enable-kvm" // Enable KVM (Kernel Virtual Machine) accelerator
@@ -213,14 +214,14 @@ or:
         // --------------------------------------------
         , "-monitor", "unix:/tmp/qemu-monitor-socket.sock,server,nowait"};
 
-    if (path.endsWith(".iso"))
+    if (path_iso != "")
     {
         // Path to ISO disk cd/dvd image
         list.push_back("-cdrom");
-        list.push_back(path);
+        list.push_back(path_iso);
     }
 
-    if (path.endsWith("qcow"))
+    if (path_qcow != "")
     {
         // -device ide-driver,..... ...
         list.push_back("-device");
@@ -228,7 +229,7 @@ or:
 
         // -drive id=MacHDD,format=qcow2,if=none,file=disk-image.qcow
         list.push_back("-drive");
-        list.push_back(QString("id=MacHDD,format=qcow2,if=none,file=") + path);
+        list.push_back(QString("id=MacHDD,format=qcow2,if=none,file=") + path_qcow);
     }
 
     if (loader.checkbox_is_checked(CHECKBOX_WINDOWS))
