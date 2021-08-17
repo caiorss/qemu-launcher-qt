@@ -13,16 +13,19 @@ AppMainWindow::AppMainWindow()
 
     form = loader.GetForm();
 
+    loader.combobox_add_item(COMBOBOX_QEMU, "qemu-system-x86_64");
+    loader.combobox_add_item(COMBOBOX_QEMU, "qemu-system-i386");
+
     // Load widget from XML gui layout file by unique identifier name. 
     this->entry_disk_path = loader.find_child<QLineEdit>(ENTRY_DISK_PATH);
-    this->entry_disk_path->setText("Loaded Ok.");
+    // this->entry_disk_path->setText("Loaded Ok.");
 
     this->spin_memory = loader.find_child<QSpinBox>(SPINBOX_MEMORY);
 
     this->btn_run = loader.find_child<QPushButton>(BTN_RUN);
 
     this->proc = new QProcess(this);
- 
+
 
     QObject::connect(proc, &QProcess::stateChanged, [=]
     {
@@ -33,6 +36,7 @@ AppMainWindow::AppMainWindow()
         loader.set_widget_disabled(CHECKBOX_ETHERNET, flag);
         loader.set_widget_disabled(CHECKBOX_AUDIO, flag);
         loader.set_widget_disabled(SPINBOX_MEMORY, flag);
+        loader.set_widget_disabled(COMBOBOX_QEMU, flag);
 
         if( proc->state() == QProcess::NotRunning) 
         {
@@ -62,7 +66,6 @@ AppMainWindow::AppMainWindow()
 
     });
 
-    const auto program = QString{"qemu-system-x86_64"};
 
     loader.on_button_clicked(BTN_STOP, [=]
     {
@@ -82,6 +85,10 @@ AppMainWindow::AppMainWindow()
 
     loader.on_button_clicked(BTN_RUN, [=]
     {
+        //QString{"qemu-system-x86_64"};
+        const auto program = loader.combobox_selected_text(COMBOBOX_QEMU); 
+        std::cout << " [TRACE] Program = " << program.toStdString() << '\n';
+
         QString path = this->entry_disk_path->text();
         QString vmname = QFileInfo(path).fileName().section(".", 0, 0);
 
@@ -90,7 +97,7 @@ AppMainWindow::AppMainWindow()
 
         std::cout << " [TRACE] UUID = " << machine_uuid.toStdString() << "\n";
 
-    display_text = QString(R"( 
+        display_text = QString(R"( 
   [-------------------------------------------------------------]
 
     Connect to QEMU console for the virtual machine using the command: 
@@ -186,7 +193,7 @@ AppMainWindow::AppMainWindow()
             list.push_back("-device");  list.push_back("hda-output,audiodev=snd0");
         }
 
-        if( loader.is_checkbox_checked("enable_ethernet") )
+        if( loader.is_checkbox_checked(CHECKBOX_ETHERNET) )
         {
             list.push_back("-net"); list.push_back("user,id=internent");
         }
