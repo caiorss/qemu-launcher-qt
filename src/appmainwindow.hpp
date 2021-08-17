@@ -56,9 +56,9 @@ public:
 
     void dragEnterEvent(QDragEnterEvent* event) override;
 
-    void kill_qemu_process();
+    void qemu_kill_process();
 
-    void run_qemu_process();
+    void qemu_run_process();
 
     void install_desktop_icon();
 

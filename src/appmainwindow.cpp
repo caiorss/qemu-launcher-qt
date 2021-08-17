@@ -21,9 +21,9 @@ AppMainWindow::AppMainWindow()
 
 
     QObject::connect(proc, &QProcess::stateChanged, this, &AppMainWindow::qemu_state_changed);
-    loader.on_button_clicked(BTN_STOP, this, &AppMainWindow::kill_qemu_process);
+    loader.on_button_clicked(BTN_STOP, this, &AppMainWindow::qemu_kill_process);
     loader.on_button_clicked(BTN_INSTALL_ICON, this, &AppMainWindow::install_desktop_icon);
-    loader.on_button_clicked(BTN_RUN, this, &AppMainWindow::run_qemu_process);
+    loader.on_button_clicked(BTN_RUN, this, &AppMainWindow::qemu_run_process);
 
     // Enable Drag and Drop Event
     this->setAcceptDrops(true);
@@ -129,12 +129,12 @@ AppMainWindow::dragEnterEvent(QDragEnterEvent* event)
 
 }
 
-void AppMainWindow::kill_qemu_process() 
+void AppMainWindow::qemu_kill_process() 
 {
     this->proc->kill();
 }
 
-void AppMainWindow::run_qemu_process()
+void AppMainWindow::qemu_run_process()
 {
     //QString{"qemu-system-x86_64"};
     const auto program = loader.combobox_selected_text(COMBOBOX_QEMU);
