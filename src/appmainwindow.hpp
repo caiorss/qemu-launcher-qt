@@ -24,9 +24,10 @@ constexpr const char* LABEL_STATUS_BAR    = "label_status_bar";
 constexpr const char* CHECKBOX_ETHERNET   = "enable_ethernet";
 constexpr const char* CHECKBOX_AUDIO      = "enable_audio";
 constexpr const char* CHECKBOX_WINDOWS    = "enable_windows";
-constexpr const char* ENTRY_DISK_PATH     = "entry_disk_path";
+constexpr const char* ENTRY_DISK_PATH     = "entry_disk_path_iso";
 constexpr const char* SPINBOX_MEMORY      = "spin_memory";
 constexpr const char* TEXTEDIT_DISPLAY    = "display";
+constexpr const char* COMBOBOX_QEMU       = "combobox_qemu";
 
 class AppMainWindow: public QMainWindow
 {
