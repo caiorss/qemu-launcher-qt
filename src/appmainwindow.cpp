@@ -45,7 +45,10 @@ AppMainWindow::AppMainWindow()
         loader.widget_setText(ENTRY_PATH_QCOW, file);
     });
 
-
+    loader.on_button_clicked(BTN_CLEAR, [=]{
+        loader.widget_setText(ENTRY_PATH_QCOW, "");
+        loader.widget_setText(ENTRY_PATH_ISO, "");
+    });
 
     // Enable Drag and Drop Event
     this->setAcceptDrops(true);
