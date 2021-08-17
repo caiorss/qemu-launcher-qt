@@ -20,9 +20,10 @@ constexpr const char* BTN_QUIT_APP        = "btn_quit_app";
 constexpr const char* BTN_RUN             = "btn_run";
 constexpr const char* BTN_STOP            = "btn_stop";
 constexpr const char* BTN_INSTALL_ICON    = "btn_icon";
-constexpr const char* BTN_FILE_ISO  = "btn_file_iso";
-constexpr const char* BTN_FILE_QCOW = "btn_file_qcow";
-constexpr const char* BTN_SHOW_HELP = "btn_show_help";
+constexpr const char* BTN_FILE_ISO        = "btn_file_iso";
+constexpr const char* BTN_FILE_QCOW       = "btn_file_qcow";
+constexpr const char* BTN_SHOW_HELP       = "btn_show_help";
+constexpr const char* BTN_CLEAR           = "btn_clear";
 
 constexpr const char* LABEL_STATUS_BAR    = "label_status_bar";
 constexpr const char* CHECKBOX_ETHERNET   = "enable_ethernet";
