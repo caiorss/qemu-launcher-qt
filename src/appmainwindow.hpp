@@ -56,6 +56,14 @@ public:
 
     void dragEnterEvent(QDragEnterEvent* event) override;
 
+    void kill_qemu_process();
+
+    void run_qemu_process();
+
+    void install_desktop_icon();
+
+    void qemu_state_changed();
+
 #if 0
     // See: https://stackoverflow.com/questions/18934964
     bool eventFilter(QObject* object, QEvent* event) override
