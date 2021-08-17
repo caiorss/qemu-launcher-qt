@@ -41,7 +41,7 @@ AppMainWindow::AppMainWindow()
         if( proc->state() == QProcess::NotRunning) 
         {
             std::fprintf(stdout, " [INFO] Process stopped. Ok. \n");
-            loader.set_widget_setText(LABEL_STATUS_BAR, "Virtual machine stopped.");
+            loader.widget_setText(LABEL_STATUS_BAR, "Virtual machine stopped.");
 
             QString qemu_stdout = this->proc->readAllStandardOutput();
             QString qemu_stderr = this->proc->readAllStandardError();
@@ -53,14 +53,14 @@ AppMainWindow::AppMainWindow()
             }
 
             output = output +  qemu_stdout + "\n\n" + qemu_stderr;
-            loader.set_widget_setText(TEXTEDIT_DISPLAY, output);
+            loader.widget_setText(TEXTEDIT_DISPLAY, output);
         }   
 
         if( proc->state() == QProcess::Running) 
         {
-            loader.set_widget_setText(LABEL_STATUS_BAR, "Virtual machine running.");
+            loader.widget_setText(LABEL_STATUS_BAR, "Virtual machine running.");
 
-            loader.set_widget_setText(TEXTEDIT_DISPLAY, display_text);
+            loader.widget_setText(TEXTEDIT_DISPLAY, display_text);
         }   
 
 

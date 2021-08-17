@@ -153,7 +153,7 @@ public:
         widget->setDisabled(flag);
     }
 
-    void set_widget_setText(QString name, QString text)
+    void widget_setText(QString name, QString text)
     {        
         QWidget* self = this->find_child<QWidget>(name);
         if( set_text<QLabel*>(self, text))           return;
