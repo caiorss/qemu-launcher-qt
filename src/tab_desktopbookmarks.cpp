@@ -6,9 +6,9 @@ Tab_DesktopBookmarks::Tab_DesktopBookmarks(QWidget* parent, FormLoader* loader):
 {
     //========= Tab - File Bookmark =================//
 
-    tab_file_bookmarks = loader->find_child<QWidget>("tab_file_bookmarks");
+    tab_file_bookmarks = loader->find_widget<QWidget>("tab_file_bookmarks");
 
-    tview_disp = loader->find_child<QTableView>("tview_disp");
+    tview_disp = loader->find_widget<QTableView>("tview_disp");
     tview_disp->horizontalHeader()->setStretchLastSection(true);
     tview_disp->verticalHeader()->hide();
     tview_disp->setSelectionMode(QTableView::SingleSelection);
@@ -26,13 +26,13 @@ Tab_DesktopBookmarks::Tab_DesktopBookmarks(QWidget* parent, FormLoader* loader):
     // Hide path column
     tview_disp->setColumnHidden(2, true);
 
-    auto entry_ftype = loader->find_child<QLineEdit>("entry_file_type");
+    auto entry_ftype = loader->find_widget<QLineEdit>("entry_file_type");
     entry_ftype->setReadOnly(true);
-    auto entry_fname = loader->find_child<QLineEdit>("entry_file_name");
+    auto entry_fname = loader->find_widget<QLineEdit>("entry_file_name");
     entry_fname->setReadOnly(true);
-    auto entry_fpath = loader->find_child<QLineEdit>("entry_file_path");
+    auto entry_fpath = loader->find_widget<QLineEdit>("entry_file_path");
     entry_fpath->setReadOnly(true);
-    auto entry_brief = loader->find_child<QLineEdit>("entry_file_brief");
+    auto entry_brief = loader->find_widget<QLineEdit>("entry_file_brief");
     // entry_brief->setReadOnly(true);
 
 

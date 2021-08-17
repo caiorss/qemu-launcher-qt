@@ -14,10 +14,10 @@ Tab_ApplicationLauncher::Tab_ApplicationLauncher(
     //========= Tab - Application Launcher ==============///
 
     // Load controls named in the form "user_interface.ui"
-    cmd_input         = loader->find_child<QComboBox>("cmd_input");
-    app_registry      = loader->find_child<QListWidget>("cmd_registry");
-    chb_editable      = loader->find_child<QCheckBox>("chb_editable");
-    chb_always_on_top = loader->find_child<QCheckBox>("chb_always_on_top");
+    cmd_input         = loader->find_widget<QComboBox>("cmd_input");
+    app_registry      = loader->find_widget<QListWidget>("cmd_registry");
+    chb_editable      = loader->find_widget<QCheckBox>("chb_editable");
+    chb_always_on_top = loader->find_widget<QCheckBox>("chb_always_on_top");
 
     // Combobox and list view share the same model
     cmd_input->setModel(app_registry->model());

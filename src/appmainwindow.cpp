@@ -17,12 +17,12 @@ AppMainWindow::AppMainWindow()
     loader.combobox_add_item(COMBOBOX_QEMU, "qemu-system-i386");
 
     // Load widget from XML gui layout file by unique identifier name. 
-    this->entry_disk_path = loader.find_child<QLineEdit>(ENTRY_DISK_PATH);
+    this->entry_disk_path = loader.find_widget<QLineEdit>(ENTRY_DISK_PATH);
     // this->entry_disk_path->setText("Loaded Ok.");
 
-    this->spin_memory = loader.find_child<QSpinBox>(SPINBOX_MEMORY);
+    this->spin_memory = loader.find_widget<QSpinBox>(SPINBOX_MEMORY);
 
-    this->btn_run = loader.find_child<QPushButton>(BTN_RUN);
+    this->btn_run = loader.find_widget<QPushButton>(BTN_RUN);
 
     this->proc = new QProcess(this);
 

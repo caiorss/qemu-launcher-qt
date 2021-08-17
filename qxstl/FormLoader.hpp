@@ -66,8 +66,9 @@ public:
 
     QWidget* GetForm() { return form;  }
 
+    /// @brief Find child widget in the user interface form file.
     template<typename T>
-    T* find_child(QString widget_name)
+    T* find_widget(QString widget_name)
     {
         T* widget = form->findChild<T*>(widget_name);
         // Throws exception if widget is not found in order to
@@ -138,7 +139,7 @@ public:
     /** Returns true if a given checkbox is checked */
     bool checkbox_is_checked(QString widget_name)
     {
-        auto checkbox = this->find_child<QCheckBox>(widget_name);
+        auto checkbox = this->find_widget<QCheckBox>(widget_name);
         return checkbox->checkState() == Qt::Checked;
         // return checkbox->isChecked();
     }
@@ -149,13 +150,13 @@ public:
      ****************************************************/
     void widget_set_disabled(QString widget_name, bool flag)
     {
-        auto widget = this->find_child<QWidget>(widget_name);
+        auto widget = this->find_widget<QWidget>(widget_name);
         widget->setDisabled(flag);
     }
 
     void widget_setText(QString name, QString text)
     {        
-        QWidget* self = this->find_child<QWidget>(name);
+        QWidget* self = this->find_widget<QWidget>(name);
         if( set_text<QLabel*>(self, text))           return;
         if( set_text<QLineEdit*>(self, text))        return;
         if( set_text<QTextEdit*>(self, text))        return; 
@@ -168,14 +169,14 @@ public:
     /// @brief Add items to a combobox.
     void combobox_add_item(QString name, QString item)
     {
-        auto self = this->find_child<QComboBox>(name);
+        auto self = this->find_widget<QComboBox>(name);
         self->addItem(item);
     }
 
     /// @brief Get selected item as string
     QString combobox_selected_text(QString name)
     {
-        auto self = this->find_child<QComboBox>(name);
+        auto self = this->find_widget<QComboBox>(name);
         return self->currentText();
     }
 
