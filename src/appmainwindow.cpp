@@ -66,13 +66,13 @@ AppMainWindow::AppMainWindow()
     //========= Create Tray Icon =======================//
 
    // // Do not quit when user clicks at close button
-   // this->setAttribute(Qt::WA_QuitOnClose, false);
+   this->setAttribute(Qt::WA_QuitOnClose, false);
 
-   // tray_icon = qx::make_window_toggle_trayicon(
-   //     this,
-   //     ":/assets/appicon.png"
-   //     , "Tray Icon Test"
-   //     );
+    auto tray_icon = qx::make_window_toggle_trayicon(
+        this,
+        ":/assets/appicon.png"
+        , "Tray Icon Test"
+        );
 
     //========= Load Application state =================//
 
@@ -81,23 +81,20 @@ AppMainWindow::AppMainWindow()
     // ========== Event Handlers of tray Icon ===============================//
 
     // Toggle this main window visible/hidden when user clicks at Tray Icon.
-    // QObject::connect(tray_icon, &QSystemTrayIcon::activated
-    //                  , [&self = *this](QSystemTrayIcon::ActivationReason r)
-    //                  {
-    //                      // User clicked at QSystemTrayIcon
-    //                      if(r  == QSystemTrayIcon::Trigger)
-    //                      {
-    //                          if(!self.isVisible())
-    //                              self.show();
-    //                          else
-    //                              self.hide();
-    //                          return;
-    //                      }
-    //                      // std::cout << " [TRACE] TrayIcon Clicked OK." << std::endl;
-    //                  });
-
-    // ========== Set Event Handlers of Application Launcher Tab ============//
-
+    QObject::connect(tray_icon, &QSystemTrayIcon::activated
+                     , [&self = *this](QSystemTrayIcon::ActivationReason r)
+                     {
+                         // User clicked at QSystemTrayIcon
+                         if(r  == QSystemTrayIcon::Trigger)
+                         {
+                             if(!self.isVisible())
+                                 self.show();
+                             else
+                                 self.hide();
+                             return;
+                         }
+                         // std::cout << " [TRACE] TrayIcon Clicked OK." << std::endl;
+                     });
 
 } // --- End of CustomerForm ctor ------//
 
