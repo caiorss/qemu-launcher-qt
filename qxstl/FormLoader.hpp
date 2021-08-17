@@ -163,6 +163,13 @@ public:
         self->setWindowTitle(text);  
     }
 
+    /// @brief Add items to a combobox.
+    void combobox_add_item(QString name, QString item)
+    {
+        auto self = this->find_child<QComboBox>(name);
+        self->addItem(item);
+    }
+
 
 private:
 
