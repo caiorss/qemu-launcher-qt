@@ -64,7 +64,7 @@
      <rect>
       <x>380</x>
       <y>160</y>
-      <width>71</width>
+      <width>161</width>
       <height>21</height>
      </rect>
     </property>
@@ -273,7 +273,7 @@
      <string>Path to disk  QCOW image</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="entry_disk_path_disk">
+   <widget class="QLineEdit" name="entry_disk_path_qcow">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -296,7 +296,7 @@
      <string>QEMU Emulator</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="btn_file_iso">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -309,7 +309,7 @@
      <string>Open</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="btn_file_qcow">
     <property name="geometry">
      <rect>
       <x>60</x>
