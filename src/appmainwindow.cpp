@@ -305,6 +305,12 @@ void AppMainWindow::qemu_state_changed()
     loader.widget_set_disabled(SPINBOX_MEMORY, flag);
     loader.widget_set_disabled(COMBOBOX_QEMU, flag);
 
+    loader.widget_set_disabled(BTN_CLEAR, flag);
+    loader.widget_set_disabled(ENTRY_PATH_QCOW, flag);
+
+    loader.widget_set_disabled(BTN_FILE_ISO, flag);
+    loader.widget_set_disabled(BTN_FILE_QCOW, flag);
+
     if (proc->state() == QProcess::NotRunning)
     {
         std::fprintf(stdout, " [INFO] Process stopped. Ok. \n");
