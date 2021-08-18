@@ -64,7 +64,7 @@ public:
     /// Make this window stay alwys on top
     void setWindowAlwaysOnTop();
 
-    void dragEnterEvent(QDragEnterEvent* event) override;
+   // void dragEnterEvent(QDragEnterEvent* event) override;
 
     void qemu_kill_process();
 

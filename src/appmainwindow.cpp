@@ -123,33 +123,6 @@ AppMainWindow::setWindowAlwaysOnTop()
     this->setWindowFlags(Qt::WindowStaysOnTopHint);
 }
 
-
-void
-AppMainWindow::dragEnterEvent(QDragEnterEvent* event)
-{
-#if 1
-
-    const QMimeData *mimeData = event->mimeData();
-    std::cout << "Drag Event" << std::endl;
-    
-    if (!mimeData->hasUrls()){ return; }
-    auto url = mimeData->urls()[0];
-    QString path;
-
-    if (url.isLocalFile())
-        path = mimeData->urls()[0].toLocalFile();
-    else
-        path = mimeData->urls()[0].toString();
-
-    std::cout << " [TRACE] Dragged file: " << path.toStdString() << "\n";
-    // this->tview_disp->addItem(path); 
-
-    this->entry_disk_path->setText(path);
-
-#endif
-
-}
-
 void AppMainWindow::qemu_kill_process() 
 {
     this->proc->kill();
@@ -163,6 +136,15 @@ void AppMainWindow::qemu_run_process()
 
     QString path_iso = loader.lineEdit_text(ENTRY_PATH_ISO).trimmed();
     QString path_qcow = loader.lineEdit_text(ENTRY_PATH_QCOW).trimmed();
+
+    QFile path = QFile(path_iso);
+
+    path_iso.replace("file://", "");
+    path_qcow.replace("file://", "");
+    loader.widget_setText(ENTRY_PATH_ISO, path_iso);
+    loader.widget_setText(ENTRY_PATH_QCOW, path_qcow);
+
+
 
     QString vmname = QFileInfo(path_iso).fileName().section(".", 0, 0);
 
