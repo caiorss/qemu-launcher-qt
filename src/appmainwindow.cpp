@@ -127,6 +127,7 @@ AppMainWindow::setWindowAlwaysOnTop()
 void AppMainWindow::qemu_kill_process() 
 {
     this->proc->kill();
+    this->proc_spice->kill();
 }
 
 void AppMainWindow::qemu_run_process()
