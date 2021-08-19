@@ -29,6 +29,7 @@ constexpr const char* LABEL_STATUS_BAR    = "label_status_bar";
 constexpr const char* CHECKBOX_ETHERNET   = "enable_ethernet";
 constexpr const char* CHECKBOX_AUDIO      = "enable_audio";
 constexpr const char* CHECKBOX_WINDOWS    = "enable_windows";
+constexpr const char* CHECKBOX_SPICE      = "enable_spice";
 
 constexpr const char* ENTRY_PATH_ISO     = "entry_disk_path_iso";
 constexpr const char* ENTRY_PATH_QCOW     = "entry_disk_path_qcow";

@@ -234,6 +234,14 @@ or:
         }
     }
 
+    if( loader.checkbox_is_checked(CHECKBOX_SPICE) )
+    {
+        // -vga qxl\
+		// -spice port=5924,disable-ticketing   
+        list.push_back("-vga"); list.push_back("qxl");
+        list.push_back("-spice"); list.push_back("port=5924,disable-ticketing");
+    }
+
     // -m <RAM-MEMORY-AMOUNT>
     // RAM Memory assigned to VM
     QString memory = QString::number(this->spin_memory->value());
