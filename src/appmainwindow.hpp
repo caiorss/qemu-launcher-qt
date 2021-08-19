@@ -57,6 +57,7 @@ private:
     QTimer*          timer;
 
     QProcess* proc;
+    QProcess* proc_spice;
     QString display_text = "";
 public:
 

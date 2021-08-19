@@ -18,7 +18,8 @@ AppMainWindow::AppMainWindow()
     this->spin_memory = loader.find_widget<QSpinBox>(SPINBOX_MEMORY);
     this->btn_run = loader.find_widget<QPushButton>(BTN_RUN);
     this->proc = new QProcess(this);
-
+    this->proc_spice = new QProcess(this);
+    
 
     QObject::connect(proc, &QProcess::stateChanged, this, &AppMainWindow::qemu_state_changed);
     loader.on_button_clicked(BTN_STOP, this, &AppMainWindow::qemu_kill_process);
@@ -234,14 +235,6 @@ or:
         }
     }
 
-    if( loader.checkbox_is_checked(CHECKBOX_SPICE) )
-    {
-        // -vga qxl\
-		// -spice port=5924,disable-ticketing   
-        list.push_back("-vga"); list.push_back("qxl");
-        list.push_back("-spice"); list.push_back("port=5924,disable-ticketing");
-    }
-
     // -m <RAM-MEMORY-AMOUNT>
     // RAM Memory assigned to VM
     QString memory = QString::number(this->spin_memory->value());
@@ -266,8 +259,26 @@ or:
         list.push_back("user,id=internent");
     }
 
+    if( loader.checkbox_is_checked(CHECKBOX_SPICE) )
+    {
+        // -vga qxl\
+		// -spice port=5924,disable-ticketing   
+        list.push_back("-vga"); list.push_back("qxl");
+        list.push_back("-spice"); list.push_back("port=5924,disable-ticketing");
+
+        
+    }
+
     // QMessageBox::about(nullptr, "Title", "Button clicked.");
     proc->start(program, list);
+
+    if( loader.checkbox_is_checked(CHECKBOX_SPICE) )
+    {
+       auto list2 = QStringList{"spice://127.0.0.1:5924", "--title", vmname};
+       proc_spice->start("remote-viewer", list2 ); 
+    }
+
+
 }
 
 void AppMainWindow::install_desktop_icon() 
