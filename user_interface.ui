@@ -62,8 +62,8 @@
    <widget class="QSpinBox" name="spin_memory">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>160</y>
+      <x>360</x>
+      <y>140</y>
       <width>161</width>
       <height>21</height>
      </rect>
@@ -78,8 +78,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>160</y>
+      <x>260</x>
+      <y>140</y>
       <width>91</width>
       <height>21</height>
      </rect>
@@ -125,8 +125,8 @@
    <widget class="QPushButton" name="btn_quit_app">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>270</y>
+      <x>330</x>
+      <y>250</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -138,8 +138,8 @@
    <widget class="QPushButton" name="btn_show_help">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>270</y>
+      <x>240</x>
+      <y>250</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -199,8 +199,8 @@
    <widget class="QPushButton" name="btn_icon">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>220</y>
+      <x>240</x>
+      <y>200</y>
       <width>80</width>
       <height>24</height>
      </rect>
@@ -250,8 +250,8 @@
    <widget class="QComboBox" name="combobox_qemu">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>190</y>
+      <x>360</x>
+      <y>170</y>
       <width>161</width>
       <height>31</height>
      </rect>
@@ -286,8 +286,8 @@
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>190</y>
+      <x>240</x>
+      <y>170</y>
       <width>111</width>
       <height>21</height>
      </rect>
@@ -352,15 +352,40 @@
      <rect>
       <x>280</x>
       <y>350</y>
-      <width>211</width>
+      <width>241</width>
       <height>21</height>
      </rect>
     </property>
+    <property name="whatsThis">
+     <string>Enable accessing virtual machine through remote viewer (spice protocol)</string>
+    </property>
     <property name="text">
-     <string>Enable Spice display</string>
+     <string>Enable remote viewer display (spice)</string>
     </property>
     <property name="checked">
      <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_remote_viewer">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>320</y>
+      <width>141</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Access virtual machine using remote viewer (spice network protocol)</string>
+    </property>
+    <property name="whatsThis">
+     <string>Access virtual machine using remote viewer (spice network protocol). The checkbox spice must be enabled.</string>
+    </property>
+    <property name="text">
+     <string>Remote viewer</string>
     </property>
    </widget>
   </widget>
