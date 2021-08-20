@@ -21,7 +21,6 @@ AppMainWindow::AppMainWindow()
     this->proc_spice = new QProcess(this);
     
 
-    QObject::connect(proc, &QProcess::stateChanged, this, &AppMainWindow::qemu_state_changed);
     loader.on_button_clicked(BTN_STOP, this, &AppMainWindow::qemu_kill_process);
     loader.on_button_clicked(BTN_INSTALL_ICON, this, &AppMainWindow::install_desktop_icon);
     loader.on_button_clicked(BTN_RUN, this, &AppMainWindow::qemu_run_process);
@@ -62,6 +61,30 @@ AppMainWindow::AppMainWindow()
                                  QApplication::quit();
                              });
 
+
+
+    QObject::connect(proc, &QProcess::stateChanged, this, &AppMainWindow::qemu_state_changed);
+
+
+    // QObject::connect(proc_spice, &QProcess::stateChanged, [=]{
+    //     bool flag = proc_spice->state() == QProcess::NotRunning;
+    //     loader.widget_set_disabled( BTN_REMOTE_SPICE, flag );
+    // });
+
+    loader.on_clicked<QCheckBox>(CHECKBOX_SPICE, [=]{
+        bool flag = loader.checkbox_is_checked(CHECKBOX_SPICE);
+        loader.widget_set_disabled(BTN_REMOTE_SPICE, !flag);
+    });
+
+
+    loader.on_button_clicked(BTN_REMOTE_SPICE, [=]{
+        proc_spice->kill();
+
+        qxstl::event::single_shot_timer(this, 1000, [=]{
+            this->remote_viewer_run();
+            std::cout << " [TRACE] Launched remote viewer Ok." << std::endl;
+        });
+    });
 
 
     //========= Create Tray Icon =======================//
@@ -275,8 +298,7 @@ or:
 
     if( loader.checkbox_is_checked(CHECKBOX_SPICE) )
     {
-       auto list2 = QStringList{"spice://127.0.0.1:5924", "--title", vmname};
-       proc_spice->start("remote-viewer", list2 ); 
+        this->remote_viewer_run();
     }
 
 
@@ -334,4 +356,10 @@ void AppMainWindow::qemu_state_changed()
 
         loader.widget_setText(TEXTEDIT_DISPLAY, display_text);
     }
+}
+
+void AppMainWindow::remote_viewer_run() 
+{
+       auto list2 = QStringList{"spice://127.0.0.1:5924"};
+       this->proc_spice->start("remote-viewer", list2 ); 
 }

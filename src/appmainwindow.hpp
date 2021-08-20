@@ -24,6 +24,8 @@ constexpr const char* BTN_FILE_ISO        = "btn_file_iso";
 constexpr const char* BTN_FILE_QCOW       = "btn_file_qcow";
 constexpr const char* BTN_SHOW_HELP       = "btn_show_help";
 constexpr const char* BTN_CLEAR           = "btn_clear";
+constexpr const char* BTN_REMOTE_SPICE    = "btn_remote_viewer";
+
 
 constexpr const char* LABEL_STATUS_BAR    = "label_status_bar";
 constexpr const char* CHECKBOX_ETHERNET   = "enable_ethernet";
@@ -75,6 +77,9 @@ public:
     void install_desktop_icon();
 
     void qemu_state_changed();
+
+    /// Run remote viewer process (spice protocol)
+    void remote_viewer_run();
 
 #if 0
     // See: https://stackoverflow.com/questions/18934964
