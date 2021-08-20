@@ -148,6 +148,21 @@ namespace qxstl::event
         return false;
     }
 
+    template<typename T>
+    void single_shot_timer(QWidget* parent, int delay, T callback)
+    {   
+        QTimer* timer = new QTimer(parent);
+        // Timer runs only a single time
+        timer->setSingleShot(true);
+
+        QObject::connect(timer, &QTimer::timeout, [=](){
+            callback();
+            timer->deleteLater();
+        });
+
+        timer->start(delay);
+    }
+
 } //--- End of qtutils namespace ------//
 
 #endif // QTUTILS_HPP
