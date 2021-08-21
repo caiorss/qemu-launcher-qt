@@ -10,6 +10,8 @@
 
 
 [[file:images/screenshot.png][file:images/screenshot.png]]
+
+[[file:images/screenshot2.png][file:images/screenshot2.png]]
   
 *** Building 
 
