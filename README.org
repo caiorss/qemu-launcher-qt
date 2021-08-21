@@ -7,6 +7,9 @@
      operating systems. This graphical user interface makes it easier
      to experiment Linux distributions live CDs ISO images and also to
      run Windows NT on a virtual machine.  
+
+
+[[file:images/screenshot.png][file:images/screenshot.png]]
   
 *** Building 
 
